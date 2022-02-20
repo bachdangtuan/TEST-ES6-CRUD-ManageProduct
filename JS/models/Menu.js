@@ -10,7 +10,7 @@ export class Menu {
     }
 
     // Xuất màn Hình
-    renderSP = function (selector) {
+    renderSP = function (selector, prdList) {
 
         var html = "";
         // for (let i = 0; i < this.arrSP.length; i++) {
@@ -29,7 +29,9 @@ export class Menu {
         //         Sum += html;
         // }
 
-        this.arrSP.map(function (ma, i) {
+        const arrRender = prdList || this.arrSP // nếu không truyền tham số prdList thì nó sẽ lấy this.arrSP
+        
+        arrRender.map(function (ma, i) {
             html += `
                       <tr>
                       <td>${ma.MaSP} </td>
@@ -101,14 +103,13 @@ export class Menu {
 
     timkiemSP = function (tenSP) {
 
-        let locDS = this.arrSP.filter(function (sp) {
+        let arrSpTimKiem = this.arrSP.filter(function (sp) {
             return sp.TenSP.includes(tenSP);
         })
-        return locDS;
-    }
 
-
-
+        // console.log("đây là",arrSpTimKiem);
+        return arrSpTimKiem
+    }   
 
     constructor() {
 

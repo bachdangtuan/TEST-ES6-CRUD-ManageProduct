@@ -9,12 +9,13 @@ let menu = new Menu()
 
 // lấy danh sách SP từ localStorage
 
+// const arrPrd = menu.arrSP
+
 menu.layStorage();
 
 // xuất màn hình
 
-menu.renderSP('tbody');
-
+menu.renderSP('tbody'); // chỗ này nó render màn hình trắng 
 // Lấy thông tin SP
 
 let addProducts = () => {
@@ -40,7 +41,6 @@ let addProducts = () => {
   //kiểm tra nhập vào
   // console.log("kiểm tra nhập vào thành công là:  ", inputSP);
   // // đẩy dữ liệu và mảng Sản Phẩm => 1 mảng sản phẩm chứa nhiều sản phẩm
-  // // arrSanPham.push(danhSachSP);
   // //kiểm tra mảng sản phẩm
   // console.log("mảng danh sách sản phẩm", arrSanPham);
 
@@ -49,8 +49,8 @@ let addProducts = () => {
   menu.addProducts(listSp)
 
   menu.luuStorage()
-
-  menu.renderSP('tbody');
+  menu.renderSP('tbody')
+  // menu.renderSP('tbody');
 
   // luuStorage(arrSanPham);
 }
@@ -94,9 +94,12 @@ let timkiemSP = () => {
   // lấy dữ liệu người dùng nhập vào
   let keyword = document.getElementById("inputTK").value;
 
-  menu.timkiemSP(keyword);
-  menu.renderSP('tbody');
+  //  menu.timkiemSP(keyword);
 
+  const arrTimKiem = menu.timkiemSP(keyword);
 
+  console.log(arrTimKiem);
+
+  menu.renderSP('tbody', arrTimKiem);
 }
 document.getElementById("inputTK").addEventListener('input', timkiemSP)
