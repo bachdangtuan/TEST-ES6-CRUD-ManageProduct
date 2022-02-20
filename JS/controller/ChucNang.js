@@ -79,12 +79,24 @@ let editProducts = () => {
     let { id, value } = input;
     sanPhamEdit[id] = value;
   }
-  console.log('Sản Phẩm Cập Nhật là',sanPhamEdit)
+  console.log('Sản Phẩm Cập Nhật là', sanPhamEdit)
   // Gán object mới cho mảng ArrSP
   menu.updateSanPham(sanPhamEdit.MaSP, sanPhamEdit)
   menu.luuStorage();
   menu.renderSP('tbody');
 }
-
-
 document.getElementById("editProducts").addEventListener('click', editProducts)
+
+
+// Tìm kiếm Sản Phẩm
+
+let timkiemSP = () => {
+  // lấy dữ liệu người dùng nhập vào
+  let keyword = document.getElementById("inputTK").value;
+
+  menu.timkiemSP(keyword);
+  menu.renderSP('tbody');
+
+
+}
+document.getElementById("inputTK").addEventListener('input', timkiemSP)

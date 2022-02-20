@@ -83,12 +83,12 @@ export class Menu {
 
     //
     layThongTinSP = function (id) {
-        return this.arrSP.find(monAn => monAn.MaSP === id);
+        return this.arrSP.find(sp => sp.MaSP === id);
     }
     // Cập nhật sản phẩm
     updateSanPham = function (id, sanPhamUpdate) {
         let spCapNhat = this.layThongTinSP(id)
-        console.log("log Sản phẩm CN",spCapNhat);
+        console.log("log Sản phẩm CN", spCapNhat);
         if (spCapNhat) {
             for (let key in spCapNhat) {
                 spCapNhat[key] = sanPhamUpdate[key];
@@ -97,6 +97,18 @@ export class Menu {
             }
         }
     }
+    // Tìm Sản Phẩm
+
+    timkiemSP = function (tenSP) {
+
+        let locDS = this.arrSP.filter(function (sp) {
+            return sp.TenSP.includes(tenSP);
+        })
+        return locDS;
+    }
+
+
+
 
     constructor() {
 
