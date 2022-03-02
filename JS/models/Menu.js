@@ -18,8 +18,8 @@ export class Menu {
                     result.data.forEach(element => {
                         this.arrSP.push({ ...element })
                     });
-                    console.log(result.data);
-                    console.log('array length:', this.arrSP.length);
+                    // console.log(result.data);
+                    // console.log('array length:', this.arrSP.length);
                     this.renderSP('tbody')
                 }
             }) 
@@ -33,7 +33,18 @@ export class Menu {
             data: prod
         }).then(() => { })
     }
+    // Deleted API
 
+    delAPI = (hihiu) =>{
+        axios({
+            url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA',
+            method: "DELETE",
+            
+        }).then(result => {
+            console.log('Result',result.data);
+         
+         })
+    }
     // Xuất màn Hình
     renderSP = function (selector, prdList, getSP) {
 
@@ -71,10 +82,12 @@ export class Menu {
         let index = this.arrSP.findIndex(function (sp) {
             return sp.MaSP === msSP;
         })
-        console.log('ma sp', msSP);
-        console.log('arr', this.arrSP);
-        console.log(index)
+        // console.log('ma sp', msSP);
+        // console.log('arr', this.arrSP);
+        // console.log(index)
         this.arrSP.splice(index, 1);
+        this.delAPI()
+
     }
 
     // Lấy dữ liệu trả về ô input
