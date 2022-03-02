@@ -5,14 +5,10 @@ import { ObjsanPham } from "../models/sanPham.js"
 
 let menu = new Menu()
 
+// menu.layStorage();
+//Get API xuất màn hình
+menu.getAPI(); 
 
-// const arrPrd = menu.arrSP
-
-menu.layStorage();
-
-// xuất màn hình
-
-menu.renderSP('tbody'); // chỗ này nó render màn hình trắng 
 // Lấy thông tin SP
 
 let addProducts = () => {
@@ -31,8 +27,8 @@ let addProducts = () => {
 
 
   menu.addProducts(listSp)
-
-  menu.luuStorage()
+  menu.pushAPI(listSp);
+  // menu.luuStorage()
   menu.renderSP('tbody')
   // menu.renderSP('tbody');
 
@@ -43,7 +39,7 @@ document.getElementById("addProducts").addEventListener('click', addProducts);
 // Xóa Sản Phẩm
 window.xoaSanPham = function (...abc) {
   menu.deletedSanPham(...abc);
-  menu.luuStorage();
+  // menu.luuStorage();
   menu.renderSP('tbody');
 }
 
@@ -66,7 +62,7 @@ let editProducts = () => {
   console.log('Sản Phẩm Cập Nhật là', sanPhamEdit)
   // Gán object mới cho mảng ArrSP
   menu.updateSanPham(sanPhamEdit.MaSP, sanPhamEdit)
-  menu.luuStorage();
+  // menu.luuStorage();
   menu.renderSP('tbody');
 }
 document.getElementById("editProducts").addEventListener('click', editProducts)
@@ -87,3 +83,5 @@ let timkiemSP = () => {
   menu.renderSP('tbody', arrTimKiem);
 }
 document.getElementById("inputTK").addEventListener('input', timkiemSP)
+
+

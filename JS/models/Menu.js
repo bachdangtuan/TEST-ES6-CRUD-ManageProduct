@@ -8,28 +8,37 @@ export class Menu {
         this.arrSP.push(prd)
 
     }
+    // Get API
+    getAPI = () => {
+            axios({
+                url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA'
+            }).then(result => {
+                //this.arrSP.push([...result.data])
+                if (result?.data) {
+                    result.data.forEach(element => {
+                        this.arrSP.push({ ...element })
+                    });
+                    console.log(result.data);
+                    console.log('array length:', this.arrSP.length);
+                    this.renderSP('tbody')
+                }
+            }) 
+    }
+    // Push API
+
+    pushAPI = (prod) =>{
+        axios({
+            url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA',
+            method: 'POST',
+            data: prod
+        }).then(() => { })
+    }
 
     // Xuất màn Hình
-    renderSP = function (selector, prdList) {
+    renderSP = function (selector, prdList, getSP) {
 
         var html = "";
-        // for (let i = 0; i < this.arrSP.length; i++) {
-        //     let test = this.arrSP[i];
-        //     var html = `
-        //          <tr>
-        //   <td>${test.MaSP} </td>
-        //   <td>${test.TenSP} </td>
-        //   <td>${test.GiaSP} </td>
-        //   <td>${test.HinhSP} </td>
-        //   <td>${test.MoTa} </td>
-        //   <td><button id="xoa"><i class="fa-solid fa-trash"></i></button>
-
-        //               <button id ="editSanPham"><i class="fa-solid fa-screwdriver-wrench"></i></button></td>
-        //            </tr>`
-        //         Sum += html;
-        // }
-
-        const arrRender = prdList || this.arrSP // nếu không truyền tham số prdList thì nó sẽ lấy this.arrSP
+        const arrRender = prdList || this.arrSP || getSP
         
         arrRender.map(function (ma, i) {
             html += `
@@ -47,15 +56,15 @@ export class Menu {
         document.querySelector(selector).innerHTML = html;
     }
     //Lưu local
-    luuStorage = function () {
-        localStorage.setItem(`arrSanPham`, JSON.stringify(this.arrSP));
-    }
-    //Lấy local
-    layStorage = function () {
-        if (localStorage.getItem('arrSanPham')) {
-            this.arrSP = JSON.parse(localStorage.getItem("arrSanPham"));
-        }
-    }
+    // luuStorage = function () {
+    //     localStorage.setItem(`arrSanPham`, JSON.stringify(this.arrSP));
+    // }
+    // //Lấy local
+    // layStorage = function () {
+    //     if (localStorage.getItem('arrSanPham')) {
+    //         this.arrSP = JSON.parse(localStorage.getItem("arrSanPham"));
+    //     }
+    // }
     // Xóa Sản Phẩm
     deletedSanPham = function (msSP) {
         // check index có vị trí bằng với giá trị nhập vào của Mã Sản phẩm
@@ -94,8 +103,7 @@ export class Menu {
         if (spCapNhat) {
             for (let key in spCapNhat) {
                 spCapNhat[key] = sanPhamUpdate[key];
-                //Đưa thông tin người dùng thay đổi gán vào object trong mảng
-                // monAnUpdate.tenMon = monAnCapNhat.tenMon;
+
             }
         }
     }
