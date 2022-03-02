@@ -60,6 +60,7 @@ let editProducts = () => {
     sanPhamEdit[id] = value;
   }
   console.log('Sản Phẩm Cập Nhật là', sanPhamEdit)
+  
   // Gán object mới cho mảng ArrSP
   menu.updateSanPham(sanPhamEdit.MaSP, sanPhamEdit)
   // menu.luuStorage();

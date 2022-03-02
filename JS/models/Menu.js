@@ -10,23 +10,23 @@ export class Menu {
     }
     // Get API
     getAPI = () => {
-            axios({
-                url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA'
-            }).then(result => {
-                //this.arrSP.push([...result.data])
-                if (result?.data) {
-                    result.data.forEach(element => {
-                        this.arrSP.push({ ...element })
-                    });
-                    // console.log(result.data);
-                    // console.log('array length:', this.arrSP.length);
-                    this.renderSP('tbody')
-                }
-            }) 
+        axios({
+            url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA'
+        }).then(result => {
+            //this.arrSP.push([...result.data])
+            if (result?.data) {
+                result.data.forEach(element => {
+                    this.arrSP.push({ ...element })
+                });
+                // console.log(result.data);
+                // console.log('array length:', this.arrSP.length);
+                this.renderSP('tbody')
+            }
+        })
     }
     // Push API
 
-    pushAPI = (prod) =>{
+    pushAPI = (prod) => {
         axios({
             url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA',
             method: 'POST',
@@ -35,22 +35,22 @@ export class Menu {
     }
     // Deleted API
 
-    delAPI = (hihiu) =>{
-        axios({
-            url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA',
-            method: "DELETE",
-            
-        }).then(result => {
-            console.log('Result',result.data);
-         
-         })
-    }
+    // delAPI = (hihiu) =>{
+    //     axios({
+    //         url: 'https://621e368a849220b1fc93323b.mockapi.io/DATA',
+    //         method: "DELETE",
+
+    //     }).then(result => {
+    //         console.log('Result',result.data);
+
+    //      })
+    // }
     // Xuất màn Hình
     renderSP = function (selector, prdList, getSP) {
 
         var html = "";
         const arrRender = prdList || this.arrSP || getSP
-        
+
         arrRender.map(function (ma, i) {
             html += `
                       <tr>
@@ -78,15 +78,23 @@ export class Menu {
     // }
     // Xóa Sản Phẩm
     deletedSanPham = function (msSP) {
+        // Call API
         // check index có vị trí bằng với giá trị nhập vào của Mã Sản phẩm
         let index = this.arrSP.findIndex(function (sp) {
             return sp.MaSP === msSP;
+        })
+        axios({
+            url: `https://621e368a849220b1fc93323b.mockapi.io/DATA/${msSP} `,
+            method: "DELETE",
+
+        }).then(result => {
+            console.log('Result', result.data);
         })
         // console.log('ma sp', msSP);
         // console.log('arr', this.arrSP);
         // console.log(index)
         this.arrSP.splice(index, 1);
-        this.delAPI()
+        // this.delAPI()
 
     }
 
@@ -116,8 +124,13 @@ export class Menu {
         if (spCapNhat) {
             for (let key in spCapNhat) {
                 spCapNhat[key] = sanPhamUpdate[key];
-
             }
+            //PUT API cap nhat
+            axios({
+                url: `https://621e368a849220b1fc93323b.mockapi.io/DATA/${id}`,
+                method: 'PUT',
+                data: spCapNhat
+            }).then(() => { })
         }
     }
     // Tìm Sản Phẩm
@@ -130,7 +143,7 @@ export class Menu {
 
         // console.log("đây là",arrSpTimKiem);
         return arrSpTimKiem
-    }   
+    }
 
     constructor() {
 
